@@ -9,6 +9,7 @@
 import UIKit
 import YouTubePlayer
 import RxSwift
+import RxCocoa
 class HomeVC: UIViewController{
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -41,7 +42,7 @@ class HomeVC: UIViewController{
     
     /* RxSwift variabhles for filtering functionality*/
     var disposeBag = DisposeBag()
-    private var selectedFilter = Variable(constants.latest.rawValue)
+    private var selectedFilter = BehaviorRelay<String>(value: constants.latest.rawValue)
     var observableForFilter:Observable<String>{
         return selectedFilter.asObservable()
     }
@@ -330,7 +331,7 @@ extension HomeVC{
         
         // Add alert Actions
         let action = UIAlertAction(title: constants.select.rawValue, style: UIAlertAction.Style.default) { (action) in
-            self.selectedFilter.value = self.didselectedFilter
+            self.selectedFilter.accept(self.didselectedFilter)
         }
         let anotheraction = UIAlertAction(title: constants.titleCancel.rawValue, style: UIAlertAction.Style.cancel) { (action) in
             

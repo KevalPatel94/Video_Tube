@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Foundation
+
 public class VideoViewModel{
     private let video : VideoModel
     var contentDetails : [ContentDetailModel]?
@@ -19,7 +19,7 @@ public class VideoViewModel{
     var isPlaying : Bool?
     
     public init(_ video: VideoModel) {
-        self.video = video
+        self.video = video // Dependency Passed in here
         self.contentDetails  = video.contentDetails
         self.etag = video.etag
         self.id = video.id
@@ -44,3 +44,6 @@ public class VideoViewModel{
         return video.snippet?.publishedAt?.convertDateStringToTimeStamp() ?? 0.0
     }
 }
+
+
+
